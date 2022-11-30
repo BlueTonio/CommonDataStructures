@@ -128,6 +128,7 @@ int main()
     set_insert(table, "OkWooper", hashmap_size);
     set_insert(table, "Kyogrez", hashmap_size);
     set_insert(table, "Sassa", hashmap_size);
+    set_insert(table, "Pippo", hashmap_size);
 
     printf("Hai cercato: %s\n", search_node(table, "OkWooper", hashmap_size)->key);
     RemoveNode(table, "OkWooper", hashmap_size);
