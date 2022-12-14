@@ -86,11 +86,19 @@ struct set_node *set_insert(struct set_table *table, const char *key, const size
 {
     size_t hash = djb33x_hash(key, key_len);
     size_t index = hash % table->hashmap_size;
+<<<<<<< HEAD
     struct set_node *head = table->nodes[index]; 
 
     if(search_node(table, key, hashmap_size) != NULL) 
     {
         if(search_node(table, key, hashmap_size)->key == key) 
+=======
+    struct set_node *head = table->nodes[index];
+
+    if(search_node(table, key, hashmap_size) != NULL)
+    {
+        if(search_node(table, key, hashmap_size)->key == key)
+>>>>>>> 8ee1b04bde33f7b85cae7cc2cba569f711055477
         {
             re_hash(table);
         }
@@ -102,8 +110,13 @@ struct set_node *set_insert(struct set_table *table, const char *key, const size
 
     if (!head)
     {
+<<<<<<< HEAD
         head = malloc(sizeof(struct set_node));
         if (!head)
+=======
+        head = malloc(sizeof(struct set_node)); 
+        if (!head) // se il nuovo nodo non esiste
+>>>>>>> 8ee1b04bde33f7b85cae7cc2cba569f711055477
         {
             return NULL;
         }
@@ -111,7 +124,11 @@ struct set_node *set_insert(struct set_table *table, const char *key, const size
         head->key_len = key_len; 
         head->next = NULL;
         head->value = Value;
+<<<<<<< HEAD
         table->nodes[index] = head;
+=======
+        table->nodes[index] = head; 
+>>>>>>> 8ee1b04bde33f7b85cae7cc2cba569f711055477
         return head; 
     }
     struct set_node *new_item = malloc(sizeof(struct set_node));
@@ -119,11 +136,19 @@ struct set_node *set_insert(struct set_table *table, const char *key, const size
     {
         return NULL;
     }
+<<<<<<< HEAD
     new_item->key = key; 
     new_item->key_len = key_len;
     new_item->next = NULL; 
     new_item->value = Value;
     struct set_node *tail = head; 
+=======
+    new_item->key = key;
+    new_item->key_len = key_len;
+    new_item->next = NULL; 
+    new_item->value = Value;
+    struct set_node *tail = head;
+>>>>>>> 8ee1b04bde33f7b85cae7cc2cba569f711055477
     tail->next = new_item; 
     return new_item; 
 }
