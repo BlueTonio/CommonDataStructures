@@ -82,48 +82,48 @@ setNode *search_node(struct set_table *table, const char *key, const size_t key_
     }
     return NULL;
 }
-struct set_node *set_insert(struct set_table *table, const char *key, const size_t key_len, const int Value) // inserisce un elemento nella tabella
+struct set_node *set_insert(struct set_table *table, const char *key, const size_t key_len, const int Value)
 {
-    size_t hash = djb33x_hash(key, key_len); // calcola l'hash della chiave
-    size_t index = hash % table->hashmap_size; // calcola l'indice della tabella
-    struct set_node *head = table->nodes[index]; // inizializza il nodo iniziale con il nodo dell'indice
+    size_t hash = djb33x_hash(key, key_len);
+    size_t index = hash % table->hashmap_size;
+    struct set_node *head = table->nodes[index]; 
 
-    if(search_node(table, key, hashmap_size) != NULL) // se la chiave è già presente nella tabella
+    if(search_node(table, key, hashmap_size) != NULL) 
     {
-        if(search_node(table, key, hashmap_size)->key == key) // se la chiave è già presente nella tabella
+        if(search_node(table, key, hashmap_size)->key == key) 
         {
             re_hash(table);
         }
         else
         {
-            return NULL; // ritorna nullo
+            return NULL;
         }
     }
 
-    if (!head) // se il nodo iniziale non esiste
+    if (!head)
     {
-        head = malloc(sizeof(struct set_node)); // alloca la memoria per il nuovo nodo
-        if (!head) // se il nuovo nodo non esiste
+        head = malloc(sizeof(struct set_node));
+        if (!head)
         {
-            return NULL; // ritorna nullo
+            return NULL;
         }
-        head->key = key; // assegna la chiave al nuovo nodo
-        head->key_len = key_len; // assegna la lunghezza della chiave al nuovo nodo
-        head->next = NULL; // assegna il nodo successivo a NULL
-        head->value = Value; // assegna il valore al nuovo nodo
-        table->nodes[index] = head; // assegna il nodo dell'indice con il nodo iniziale
-        return head; // ritorna il nodo iniziale
+        head->key = key;
+        head->key_len = key_len; 
+        head->next = NULL;
+        head->value = Value;
+        table->nodes[index] = head;
+        return head; 
     }
-    struct set_node *new_item = malloc(sizeof(struct set_node)); // alloca la memoria per il nuovo nodo
-    if (!new_item) // se il nuovo nodo non esiste
+    struct set_node *new_item = malloc(sizeof(struct set_node));
+    if (!new_item)
     {
-        return NULL; // ritorna nullo
+        return NULL;
     }
-    new_item->key = key; // assegna la chiave al nuovo nodo
-    new_item->key_len = key_len; // assegna la lunghezza della chiave al nuovo nodo
-    new_item->next = NULL; // assegna il nodo successivo a NULL 
-    new_item->value = Value; // assegna il valore al nuovo nodo
-    struct set_node *tail = head; // inizializza il nodo finale con il nodo iniziale 
+    new_item->key = key; 
+    new_item->key_len = key_len;
+    new_item->next = NULL; 
+    new_item->value = Value;
+    struct set_node *tail = head; 
     tail->next = new_item; 
     return new_item; 
 }
